@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const menuOpen = document.querySelector(".menu-open");
     const backdrop = document.querySelector(".backdrop");
-    const menuCLose = document.querySelector(".menu-close");
+    const menuClose = document.querySelector(".menu-close");
     const itemImg = document.querySelector("#item-img");
     const prevBtn = document.querySelector("#prev-btn");
     const nextBtn = document.querySelector("#next-btn");
@@ -18,17 +18,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentPrice = document.querySelector(".current-price");
     const productTitle = document.querySelector(".product__text").textContent;
 
-    let itemAdded = false; // Tracks if an item has been added to the cart
+    let itemAdded = false;
 
-
+    // Open and Close Menu
     menuOpen.addEventListener("click", () => {
         backdrop.classList.add("open");
     });
 
-    menuCLose.addEventListener("click", () => {
+    menuClose.addEventListener("click", () => {
         backdrop.classList.remove("open");
     });
 
+    // Image carousel
     const images = [
         "./images/image-product-1.jpg",
         "./images/image-product-2.jpg",
@@ -38,104 +39,102 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentIndex = 0;
 
-    //Update image and progress based on the current index
     function updateImage() {
         itemImg.src = images[currentIndex];
         progress.value = currentIndex + 1;
     }
 
-    //Previous btn click
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + images.length) % images.length; // Wrap around to last image
+    prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
         updateImage();
     });
 
-    //Next btn 
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % images.length; // Wrap around to first image
+    nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % images.length;
         updateImage();
     });
 
-    //Initialize with the first image
     updateImage();
 
-    //Decrease quantity
-    decreaseBtn.addEventListener('click', function () {
+    // Quantity controls
+    decreaseBtn.addEventListener("click", function () {
         let currentValue = parseInt(quantityInput.value);
-        if (currentValue >= 1) {
-            quantityInput.value = currentValue - 1
+        if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
         }
     });
 
-    // Increase quantity
-    increaseBtn.addEventListener('click', function () {
-        let currentValue = parseInt(quantityInput.value);
-        quantityInput.value = currentValue + 1;
+    increaseBtn.addEventListener("click", function () {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
     });
 
-    // Update basket count when "Add to cart" button is clicked
-    addToBasket.addEventListener('click', function (e) {
+    // Add to basket button
+    addToBasket.addEventListener("click", function (e) {
         e.preventDefault();
         const currentValue = parseInt(quantityInput.value);
 
-        // Update the basket count
+        if (currentValue > 0) {
         basketCount.textContent = currentValue;
-        basketCount.style.display = currentValue > 0 ? 'flex' : 'none';
-        console.log('Added to cart');
+        basketCount.style.display = currentValue > 0 ? "flex" : "none";
+        updateCartDisplay();
+        
+        // Announce the change in basket count for screen readers
+        const liveRegion = document.getElementById("live-region");
+        liveRegion.textContent = `There are ${currentValue} items in your basket.`;
+        console.log("Added to cart");
+        }
     });
 
-    // Toggle cart modal visibility
-    basketBtn.addEventListener('click', function () {
-        cartModal.classList.toggle('hidden');
+    // Toggle cart modal on basket button click
+    basketBtn.addEventListener("click", function () {
+        cartModal.classList.toggle("hidden");
         updateCartDisplay();
     });
 
-    // Update cart content based on item quantity
+    // Update cart display function
     function updateCartDisplay() {
         const quantity = parseInt(quantityInput.value);
-        const pricePerItem = parseFloat(currentPrice.textContent.replace('$', ''));
-
-        // Clear previous content
-        cartContent.innerHTML = '';
+        const pricePerItem = parseFloat(
+            currentPrice.textContent.replace("$", "")
+        );
+        // Always ensure that the cart-content includes the empty message
+        cartContent.innerHTML = `<p class="empty-message">Your cart is empty.</p>`;  // Default state
 
         if (quantity > 0) {
-            itemAdded = true;
-            emptyMessage.classList.add('hidden');
+            emptyMessage.classList.add("hidden"); // Hide empty message
+            const totalPrice = (pricePerItem * quantity).toFixed(2);
 
-            // Display the item in the cart
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
-
-            // Calculate the total price based on quantity
-            const totalPrice = (pricePerItem * quantity).toFixed(2); 
-
+            // Create a cart item and append it to the cart content
+            const cartItem = document.createElement("div");
+            cartItem.classList.add("cart-item");
             cartItem.innerHTML = `
-            <img src="./images/image-product-1-thumbnail.jpg" alt="Product thumbnail" class="cart-thumbnail">
-            <div>
-                <p class="cart-description">${productTitle}</p>
-                <p>$${pricePerItem.toFixed(2)} x ${quantity}  <strong>$${totalPrice}</strong></p>
-            </div>
-            <img src="./images/icon-delete.svg" alt="Delete item" class="delete-icon">
-        `;
-
+                <img src="./images/image-product-1-thumbnail.jpg" alt="Product thumbnail" class="cart-thumbnail">
+                <div>
+                    <p class="cart-description">${productTitle}</p>
+                    <p>$${pricePerItem.toFixed(
+                    2
+                    )} x ${quantity} <strong>$${totalPrice}</strong></p>
+                </div>
+                <img src="./images/icon-delete.svg" alt="Delete item" class="delete-icon">
+            `;
+            cartContent.innerHTML = "";
             cartContent.appendChild(cartItem);
+
             // Select the delete icon and add event listener to remove the item
-            const deleteIcon = cartItem.querySelector('.delete-icon');
+            const deleteIcon = cartItem.querySelector(".delete-icon");
             deleteIcon.addEventListener("click", function () {
-                //Remove item from the cart
-                cartContent.innerHTML = '';
-                emptyMessage.classList.remove("hidden");
-                quantityInput.value = 0;
-                basketCount.style.display = "none";
-                itemAdded = false;
+            cartContent.innerHTML = ""; // Clear cart content
+            emptyMessage.classList.remove("hidden"); // Show empty message again
+            basketCount.style.display = "none";
+            quantityInput.value = "0";
             });
-        
+
             // Create and append the checkout button
-            const checkoutButton = document.createElement('button');
+            const checkoutButton = document.createElement("button");
             checkoutButton.classList.add("checkout-btn");
             checkoutButton.textContent = "Checkout";
 
-            // Style the button
+            // Add style and functionality to the checkout button
             checkoutButton.style.backgroundColor = "rgb(255, 125, 26)";
             checkoutButton.style.color = "rgb(29, 32, 37)";
             checkoutButton.style.fontWeight = "bold";
@@ -145,22 +144,28 @@ document.addEventListener("DOMContentLoaded", function () {
             checkoutButton.style.border = "none";
             checkoutButton.style.borderRadius = "7px";
             checkoutButton.style.cursor = "pointer";
-            checkoutButton.style.width = `calc(100% - 4.4rem)`;
-            
+            checkoutButton.style.width = "calc(100% - 4.4rem)";
             cartContent.appendChild(checkoutButton);
 
-            // Optional: Add a click event listener for checkout action
             checkoutButton.addEventListener("click", function () {
-            // Redirect to checkout or trigger checkout functionality
             alert("Proceeding to checkout!");
-            // Or window.location.href = "/checkout";
             });
-
-    } else {
-            itemAdded = false;
-            emptyMessage.classList.remove('hidden');
+        } else {
+            emptyMessage.classList.remove("hidden"); // Show empty message if no items
         }
     }
 
 
+    // Close cart modal on click outside or pressing escape
+    document.addEventListener("click", (event) => {
+        if (!cartModal.contains(event.target) && event.target !== basketBtn) {
+        cartModal.classList.add("hidden");
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+        cartModal.classList.add("hidden");
+        }
+    });
 });

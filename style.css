@@ -361,7 +361,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 
 .hidden {
-    display: none;
+    display: none!important;
 }
 
 .cart-modal h2 {
@@ -371,11 +371,16 @@ input[type="number"]::-webkit-inner-spin-button {
     font-weight: var(--fw-bold);
 }
 
+.empty-message {
+    display: block; /* Ensure it's visible by default */
+}
 
 .cart-modal .empty-message {
     color: grey;
-    font-size: 1rem;
+    font-size: 1.6rem;
     text-align: center;
+    font-weight: var(--fw-bold);
+    padding: 10rem;
 }
 
 strong{
