@@ -317,6 +317,14 @@ input[type="number"]::-webkit-inner-spin-button {
 
 #basket-btn {
     position: relative;
+    width: 100px; /* Asegúrate de que tenga suficiente tamaño */
+    height: 40px;
+    padding: 10px;
+    z-index: 11;
+}
+
+#basket-btn img {
+    pointer-events: none; /* Asegura que el clic se propague al contenedor del botón */
 }
 
 #basket-count {
