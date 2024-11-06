@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <meta
+      name="description"
+      content="A responsive ecommerce product page with an interactive toggle feature, built using HTML, CSS, and JavaScript. Perfect for improving frontend development skills."
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Frontend Mentor | E-commerce product page</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <nav aria-label="Main Navigation">
+          <div class="mobile-nav">
+            <div class="left-nav">
+              <button
+                class="mobile-only menu-open"
+                id="menu-open"
+                aria-expanded="false"
+                aria-controls="navbar"
+                aria-label="Open navigation menu"
+                aria-hidden="false"
+              >
+                <img
+                  src="./images/icon-menu.svg"
+                  alt="Open navigation menu"
+                  class="menu-img"
+                />
+              </button>
+              <a href="#" class="logo">
+                <img
+                  src="./images/logo.svg"
+                  alt="Sneakers Home Page"
+                  aria-current="page"
+                />
+              </a>
+              <div class="backdrop mobile-only">
+                <ul class="nav-links" aria-hidden="true" aria-expanded="false">
+                  <li>
+                    <button
+                      class="menu-close mobile-only"
+                      id="menu-close"
+                      aria-expanded="true"
+                      aria-controls="side-nav"
+                      aria-label="Close side navigation menu"
+                    >
+                      <img
+                        src="./images/icon-close.svg"
+                        alt="Close navigation menu"
+                      />
+                    </button>
+                  </li>
+                  <li><a href="#">Collections</a></li>
+                  <li><a href="#">Men</a></li>
+                  <li><a href="#">Women</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="right-nav">
+              <button
+                id="basket-btn"
+                aria-label="Open dropdown basket"
+                aria-controls="cart-modal"
+              >
+                <img src="./images/icon-cart.svg" alt="Cart icon" />
+                <span id="basket-count"></span>
+              </button>
+              <button>
+                <img src="./images/image-avatar.png" alt="" class="avatar" />
+              </button>
+            </div>
+            <ul
+              id="side-nav"
+              class="side-nav"
+              aria-hidden="true"
+              aria-expanded="false"
+            >
+              <li>
+                <button
+                  aria-label="Close side navigation menu"
+                  id="close-nav"
+                  aria-controls="side-nav"
+                >
+                  <img
+                    class="mobile-only close-icon"
+                    src="./assets/images/icon-close.svg"
+                    alt=""
+                    width="14"
+                    height="15"
+                  />
+                </button>
+              </li>
+              <li><a href="#">Collections</a></li>
+              <li><a href="#">Men</a></li>
+              <li><a href="#">Women</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <h1 class="sr-only">SNEAKERS</h1>
+        <article class="product">
+          <div class="product__imgs">
+            <div class="product__main-img">
+              <button
+                id="prev-btn"
+                class="mobile-only prev-btn"
+                aria-label="Click to see previous image"
+              >
+                <img
+                  src="./images/icon-previous.svg"
+                  alt="icon previous"
+                  class="previous-next-icons"
+                />
+              </button>
+              <img
+                id="item-img"
+                src="./images/image-product-1.jpg"
+                alt="Image of the Sneaker brand white shoes with some beige on the sides"
+                aria-controls="modal-img-prev"
+              />
+              <progress
+                id="progress"
+                value="1"
+                max="4"
+                aria-hidden="true"
+                class="desktop-only"
+              ></progress>
+              <button
+                id="next-btn"
+                class="mobile-only next-btn"
+                aria-label="Click to see next image"
+              >
+                <img
+                  src="./images/icon-next.svg"
+                  alt="icon next"
+                  class="previous-next-icons"
+                />
+              </button>
+              <div id="cart-modal" class="cart-modal hidden">
+                <h2>Cart</h2>
+                <div id="cart-content">
+                  <p class="empty-message">Your cart is empty.</p>
+                  <!-- Cart items will be dynamically inserted here if any -->
+                </div>
+              </div>
+            </div>
+            <ul class="product__thumbnails desktop-only">
+              <li>
+                <label>
+                  <input
+                    type="radio"
+                    id="image-product-1"
+                    name="product-thumbnail-img"
+                    aria-label="Select to see first product image"
+                    autofocus
+                  />
+                  <img src="./images/image-product-1-thumbnail.jpg" alt="" />
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    type="radio"
+                    id="image-product-2"
+                    name="product-thumbnail-img"
+                    aria-label="Select to see second product image"
+                  />
+                  <img src="./images/image-product-2-thumbnail.jpg" alt="" />
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    type="radio"
+                    id="image-product-3"
+                    name="product-thumbnail-img"
+                    aria-label="Select to see third product image"
+                  />
+                  <img src="./images/image-product-3-thumbnail.jpg" alt="" />
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    type="radio"
+                    id="image-product-4"
+                    name="product-thumbnail-img"
+                    aria-label="Select to see fourth product image"
+                  />
+                  <img src="./images/image-product-4-thumbnail.jpg" alt="" />
+                </label>
+              </li>
+            </ul>
+          </div>
+          <section class="product__text-section">
+            <div class="product__description">
+              <p class="product__ribbon">Sneaker Company</p>
+              <h2 class="product__text">Fall Limited Edition Sneakers</h2>
+              <p class="product__sub-text">
+                These low-profile sneakers are your perfect casual wear
+                companion. Featuring a durable rubber outer sole, they'll
+                withstand everything the weather can offer.
+              </p>
+            </div>
+            <div class="product__price">
+              <dl class="product__current-price">
+                <dt class="sr-only">Current price:</dt>
+                <dd class="current-price">$125.00</dd>
+                <dt class="sr-only">Discount:</dt>
+                <dd class="discount">50%</dd>
+              </dl>
+              <dl class="product__old-price">
+                <dt class="sr-only">Old price:</dt>
+                <dd class="old-price">$250.00</dd>
+              </dl>
+            </div>
+            <form id="form" class="product__buttons">
+              <fieldset class="quantity">
+                <legend class="sr-only">Quantity:</legend>
+                <div class="input-container">
+                  <button
+                    id="decrease-btn"
+                    type="button"
+                    aria-label="Decrease the number of items you want"
+                    class="inc-dec-btns"
+                  >
+                    <img src="./images/icon-minus.svg" alt="decrease button" />
+                  </button>
+                  <input
+                    type="number"
+                    id="number-of-items"
+                    value="0"
+                    min="1"
+                    aria-label="Enter the number of items you want"
+                  />
+                  <button
+                    id="increase-btn"
+                    type="button"
+                    aria-label="Increase the number of items you want"
+                    class="inc-dec-btns"
+                  >
+                    <img src="./images/icon-plus.svg" alt="" />
+                  </button>
+                </div>
+              </fieldset>
+
+              <div class="cart">
+                <button id="add-to-basket" type="submit">
+                  <svg
+                    width="22"
+                    height="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+                      fill="currentColor"
+                      fill-rule="nonzero"
+                    /></svg
+                  >Add to cart
+                </button>
+              </div>
+            </form>
+          </section>
+        </article>
+      </main>
+      <footer>
+        <div class="attribution">
+          Challenge by
+          <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+            >Frontend Mentor</a
+          >. Coded by <a href="#">Claudia Dom</a>.
+        </div>
+      </footer>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
