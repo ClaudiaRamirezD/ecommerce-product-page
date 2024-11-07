@@ -42,6 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateImage() {
         itemImg.src = images[currentIndex];
         progress.value = currentIndex + 1;
+
+        // Apply object-position only to images after the first
+        if (currentIndex === 0) {
+            itemImg.style.objectPosition = "";
+        } else {
+            itemImg.style.objectPosition = "top";
+        }
     }
 
     prevBtn.addEventListener("click", () => {
@@ -82,6 +89,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const liveRegion = document.getElementById("live-region");
         liveRegion.textContent = `There are ${currentValue} items in your basket.`;
         console.log("Added to cart");
+            
+        // Scroll to the top of the page where the cart is located
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         }
     });
 
@@ -137,6 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Add style and functionality to the checkout button
             checkoutButton.style.backgroundColor = "rgb(255, 125, 26)";
             checkoutButton.style.color = "rgb(29, 32, 37)";
+            checkoutButton.style.fontSize = "1.6rem"
             checkoutButton.style.fontWeight = "bold";
             checkoutButton.style.padding = "1.7rem";
             checkoutButton.style.marginInline = "2.2rem";

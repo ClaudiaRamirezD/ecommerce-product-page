@@ -41,7 +41,6 @@ body {
     object-fit: cover;
     height: 33rem;
     width: 100%;
-
 }
 
 .avatar{ 
@@ -401,3 +400,161 @@ footer {
 }
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
+
+@media (min-width: 50rem) {
+    body{
+        margin: 0 auto;
+    }
+    .container {
+        width: 80%;
+        max-width: 175rem;
+        margin: 0 auto;
+    }
+    .menu-open{
+        display: none;
+    }
+
+    .mobile-nav{
+        padding: 3.5rem 0;
+    }
+
+    .logo img {
+        height: 2.5rem;
+    }
+
+    .backdrop{
+        display: block;
+        position: static; /* Reset positioning */
+        width: auto;
+        height: auto;
+        background: transparent; /* Remove backdrop background */
+        align-items: flex-start; /* Reset alignment */
+    }
+
+    .nav-links {
+        flex-direction: row; /* Change to horizontal layout */
+        gap: 3.5rem;
+        width: auto;
+        height: auto;
+        padding: 0;
+        transform: none; /* Remove translate effect */
+        font-size: 1.8rem; /* Adjust font size for desktop */
+        color: var(--clr-dark-grayish-blue);
+        background-color: transparent; /* Remove background color */
+    }
+
+    .menu-close {
+        display: none; /* Hide mobile close button */
+    }
+
+    .left-nav {
+        align-items: center;
+    }
+
+    .right-nav {
+        gap: 6rem;
+    }
+
+    #basket-btn img {
+        width: 2.7rem;
+    }
+
+    .avatar {
+    width: 6rem;
+    }
+
+    header {
+        border-bottom: 1px solid var(--grayish-blue);
+    }
+
+    main {
+        padding: 8rem 2rem;
+    }
+
+    .product {
+        display: flex;
+        gap: 6rem;
+    }
+
+    #item-img, label img{
+        height: auto;
+        border-radius: 2rem;
+    }
+
+    article > * {
+        flex-grow: 1;
+    }
+
+
+    #prev-btn, #next-btn{
+        display: none;
+    }
+
+    .desktop-only {
+    display: flex;
+    gap: 2.5rem;
+    padding-block: 2.5rem;
+    justify-content: space-between;
+    }
+
+    .product__thumbnails img {
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    }
+
+    input[type="radio"] {
+    opacity: 0; /* Hide the default radio button but keep it functional */
+    position: absolute; /* Remove it from the document flow */
+    pointer-events: none; /* Prevent interaction with the default radio button */
+    }
+    
+    label img {
+        width: 12rem;
+    }
+
+    .product__text-section {
+    gap: 0;
+    align-content: space-evenly;
+    padding: clamp(0rem, -1.5789rem + 3.1579vw, 6rem);
+    }
+
+    .product__ribbon {
+        font-size: 1.8rem;
+    }
+
+    h2.product__text {
+    font-size: 5rem;
+    line-height: 1.2;
+    }
+
+    .product__price{
+    flex-direction: column; 
+    align-items: flex-start;
+    justify-content: normal;
+    gap: 1rem;
+    }
+
+    dd.current-price {
+    font-size: 3rem;
+    }
+
+    dd.discount{
+    font-size: 2rem;
+    }
+
+    .product__buttons {
+    grid-template-columns: 1fr 2fr;
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    }
+
+    .product__description{
+    gap: 3rem;
+    }
+
+    .product__sub-text {
+        line-height: 2;
+        font-size: 1.8rem;
+    }
+}
