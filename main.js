@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const emptyMessage = document.querySelector(".empty-message");
     const currentPrice = document.querySelector(".current-price");
     const productTitle = document.querySelector(".product__text").textContent;
+    console.log("JavaScript is running");
 
     let itemAdded = false;
 
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Quantity controls
     decreaseBtn.addEventListener("click", function () {
         let currentValue = parseInt(quantityInput.value);
-        if (currentValue > 1) {
+        if (currentValue >= 1) {
         quantityInput.value = currentValue - 1;
         }
     });
@@ -88,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Announce the change in basket count for screen readers
         const liveRegion = document.getElementById("live-region");
         liveRegion.textContent = `There are ${currentValue} items in your basket.`;
-        console.log("Added to cart");
+        basketBtn.focus();
             
         // Scroll to the top of the page where the cart is located
             window.scrollTo({

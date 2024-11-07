@@ -452,7 +452,7 @@ footer {
     }
 
     .right-nav {
-        gap: 6rem;
+        gap: clamp(0rem, -1.5789rem + 3.1579vw, 6rem);
     }
 
     #basket-btn img {
@@ -461,6 +461,11 @@ footer {
 
     .avatar {
     width: 6rem;
+    }
+
+    .avatar:hover{
+        border-radius: 50%;
+        border: 3px solid var(--clr-primary-orange);
     }
 
     header {
@@ -557,4 +562,44 @@ footer {
         line-height: 2;
         font-size: 1.8rem;
     }
+
+    .product__imgs{
+        width: 80%;
+    }
+
+    .nav-links li {
+        position: relative; 
+    }
+
+    .nav-links li:hover{
+        color: var(--clr-very-dark-blue);
+    }
+
+    .nav-links li::after {
+        content: ""; 
+        position: absolute;
+        left: 0;
+        bottom: -5.3rem;
+        width: 100%;
+        height: 4px;
+        background-color: var(--clr-primary-orange);
+        transform: scaleX(0); 
+        transition: transform 0.3s ease;
+    }   
+
+    .nav-links li:hover::after {
+        transform: scaleX(1); 
+    }
+
+    .cart-modal {
+    position: absolute;
+    top: -12rem;
+    left: clamp(20rem, -14.2105rem + 68.4211vw, 150rem);
+    width: 70%;
+    }
+
+    #add-to-basket:hover {
+        background-color: hsl(27, 100%, 71%);
+    }
+
 }
