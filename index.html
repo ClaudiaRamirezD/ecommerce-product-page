@@ -99,11 +99,11 @@
                 >
                   <img
                     class="mobile-only close-icon"
-                    src="./assets/images/icon-close.svg"
+                    src="./images/icon-close.svg"
                     alt=""
                     width="14"
                     height="15"
-                  />
+                  >
                 </button>
               </li>
               <li><a href="#">Collections</a></li>
@@ -136,13 +136,13 @@
                 src="./images/image-product-1.jpg"
                 alt="Image of the Sneaker brand white shoes with some beige on the sides"
                 aria-controls="modal-img-prev"
-              />
+              >
               <progress
                 id="progress"
                 value="1"
                 max="4"
                 aria-hidden="true"
-                class="desktop-only"
+                class="desktop-only hidden"
               ></progress>
               <button
                 id="next-btn"
@@ -162,6 +162,64 @@
                   <!-- Cart items will be dynamically inserted here if any -->
                 </div>
               </div>
+              <!-- The modal container for the larger image view -->
+              <div id="image-modal" class="modal hidden">
+                <div class="modal-content">
+                  <button id="close-modal" aria-label="Close image view">&times;</button>
+                  <button id="prev-modal-btn" aria-label="Previous image"><svg width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/></svg></button>
+                  <img id="modal-img" src="./images/image-product-1.jpg" alt="Product image" />
+                  <button id="next-modal-btn" aria-label="Next image"><svg width="13" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/></svg></button>
+                  <div class="modal-thumbnails">
+                    <ul class="product__thumbnails desktop-only">
+                      <li>
+                        <label>
+                          <input
+                            type="radio"
+                            id="image-product-1"
+                            name="product-thumbnail-img"
+                            aria-label="Select to see first product image"
+                            autofocus
+                          />
+                          <img src="./images/image-product-1-thumbnail.jpg" alt="" class="thumbnail" />
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                          <input
+                            type="radio"
+                            id="image-product-2"
+                            name="product-thumbnail-img"
+                            aria-label="Select to see second product image"
+                          />
+                          <img src="./images/image-product-2-thumbnail.jpg" alt="" class="thumbnail" />
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                          <input
+                            type="radio"
+                            id="image-product-3"
+                            name="product-thumbnail-img"
+                            aria-label="Select to see third product image"
+                          />
+                          <img src="./images/image-product-3-thumbnail.jpg" alt="" class="thumbnail"/>
+                        </label>
+                      </li>
+                      <li>
+                        <label>
+                          <input
+                            type="radio"
+                            id="image-product-4"
+                            name="product-thumbnail-img"
+                            aria-label="Select to see fourth product image"
+                          />
+                          <img src="./images/image-product-4-thumbnail.jpg" alt="" class="thumbnail"/>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
             <ul class="product__thumbnails desktop-only">
               <li>
@@ -173,7 +231,7 @@
                     aria-label="Select to see first product image"
                     autofocus
                   />
-                  <img src="./images/image-product-1-thumbnail.jpg" alt="" />
+                  <img src="./images/image-product-1-thumbnail.jpg" alt="" class="thumbnail" />
                 </label>
               </li>
               <li>
@@ -184,7 +242,7 @@
                     name="product-thumbnail-img"
                     aria-label="Select to see second product image"
                   />
-                  <img src="./images/image-product-2-thumbnail.jpg" alt="" />
+                  <img src="./images/image-product-2-thumbnail.jpg" alt="" class="thumbnail" />
                 </label>
               </li>
               <li>
@@ -195,7 +253,7 @@
                     name="product-thumbnail-img"
                     aria-label="Select to see third product image"
                   />
-                  <img src="./images/image-product-3-thumbnail.jpg" alt="" />
+                  <img src="./images/image-product-3-thumbnail.jpg" alt="" class="thumbnail"/>
                 </label>
               </li>
               <li>
@@ -206,10 +264,16 @@
                     name="product-thumbnail-img"
                     aria-label="Select to see fourth product image"
                   />
-                  <img src="./images/image-product-4-thumbnail.jpg" alt="" />
+                  <img src="./images/image-product-4-thumbnail.jpg" alt="" class="thumbnail"/>
                 </label>
               </li>
             </ul>
+            <div id="zoom-modal" class="zoom-modal hidden">
+              <div class="zoom-modal-content">
+                  <img id="zoomed-image" src="" alt="Zoomed Product Image">
+                  <button id="close-zoom-modal" class="close-zoom-btn">Close</button>
+              </div>
+            </div>  
           </div>
           <section class="product__text-section">
             <div class="product__description">
