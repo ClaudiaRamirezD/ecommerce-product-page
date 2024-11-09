@@ -17,19 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const emptyMessage = document.querySelector(".empty-message");
     const currentPrice = document.querySelector(".current-price");
     const productTitle = document.querySelector(".product__text").textContent;
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    const mainThumbnails = document.querySelectorAll(".product__thumbnails-main .thumbnail");
+    const thumbnails = document.querySelectorAll('.product__thumbnails-main .thumbnail');
+    const modalThumbnails = document.querySelectorAll(".product__thumbnails-modal .thumbnail");
 
     let currentIndex = 0;
 
     // Open and Close Menu
-    menuOpen.addEventListener("click", () => {
-        backdrop.classList.add("open");
-    });
-
-    menuClose.addEventListener("click", () => {
-        backdrop.classList.remove("open");
-    });
+    menuOpen.addEventListener("click", () => backdrop.classList.add("open"));
+    menuClose.addEventListener("click", () => backdrop.classList.remove("open"));
 
     // Image carousel
     const images = [
@@ -40,123 +35,50 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     // Ensure index is within valid range
+    function getValidIndex(index) {
+        return (index + images.length) % images.length; // Ensure the index stays within 0-3
+    }
+
+    // Update image and progress
     function updateImage(index) {
         if (index < 0 || index >= images.length) {
             console.error("Index out of bounds:", index);
-            return; // Prevent updating if the index is invalid
+            return;
         }
-        console.log("Updating image:", index);
         itemImg.src = images[index];
         progress.value = index + 1;
         itemImg.style.objectPosition = currentIndex === 0 ? "" : "top";
     }
 
-    console.log("Number of thumbnails:", thumbnails.length); // Log number of thumbnails
-
-    thumbnails.forEach((thumbnail, index) => {
-        const label = thumbnail.closest("label");
-        if (label) {
-            label.addEventListener("click", () => {
-                const validIndex = getValidIndex(index); // Ensures valid index
-                updateImage(validIndex);
-            });
-        } else {
-            console.error("Label not found for thumbnail:", index);
-        }
-    });
-
-
-    mainThumbnails.forEach((thumbnail, index) => {
-        const label = thumbnail.closest("label");
-        if (label) {
-            label.addEventListener("click", () => {
-                const validIndex = index % images.length; // Ensures index is always within bounds
-                console.log("Updating image:", validIndex); // For debugging
-                updateImage(validIndex);
-
-                const radioButton = document.querySelector(`#image-product-${validIndex + 1}`);
-                if (radioButton) {
-                    radioButton.checked = true;
-                } else {
-                    console.error(`Radio button with ID image-product-${validIndex + 1} not found.`);
-                }
-            });
-        } else {
-            console.error("Label not found for thumbnail:", index);
-        }
-    });
-
-    // Function to ensure the index is always within the bounds of the images array
-function getValidIndex(index) {
-    return (index + images.length) % images.length; // This ensures the index is always within 0-3
-}
-
-// Event listeners for carousel navigation buttons
-prevBtn.addEventListener("click", () => {
-    currentIndex = getValidIndex(currentIndex - 1); // Ensure the index stays within bounds
-    updateImage(currentIndex);
-});
-
-nextBtn.addEventListener("click", () => {
-    currentIndex = getValidIndex(currentIndex + 1); // Ensure the index stays within bounds
-    updateImage(currentIndex);
-});
-
-// Image carousel thumbnail click event
-mainThumbnails.forEach((thumbnail, index) => {
-    const label = thumbnail.closest("label");
-    if (label) {
-        label.addEventListener("click", () => {
-            const validIndex = getValidIndex(index); // Ensure the index is within bounds
-            console.log("Updating image:", validIndex); // For debugging
-            updateImage(validIndex);
-
-            const radioButton = document.querySelector(`#image-product-${validIndex + 1}`);
+    // Image carousel thumbnail click event (combined for both main and modal thumbnails)
+    function handleThumbnailClick(thumbnail, index) {
+        thumbnail.addEventListener("click", () => {
+            currentIndex = getValidIndex(index);
+            updateImage(currentIndex);
+            const radioButton = document.querySelector(`#image-product-${currentIndex + 1}`);
             if (radioButton) {
                 radioButton.checked = true;
-            } else {
-                console.error(`Radio button with ID image-product-${validIndex + 1} not found.`);
             }
         });
-    } else {
-        console.error("Label not found for thumbnail:", index);
     }
-});
 
+    // Attach click listeners for thumbnails in both modal and main views
+    thumbnails.forEach((thumbnail, index) => handleThumbnailClick(thumbnail, index));
+    modalThumbnails.forEach((thumbnail, index) => handleThumbnailClick(thumbnail, index));
 
-
-
-    // Select only the modal view thumbnails
-    const modalThumbnails = document.querySelectorAll(".product__thumbnails-modal .thumbnail");
-
-    modalThumbnails.forEach((thumbnail, index) => {
-        const label = thumbnail.closest("label");
-        if (label) {
-            label.addEventListener("click", () => {
-                const validIndex = getValidIndex(index); // Ensures valid index
-                updateImage(validIndex);
-            });
-        } else {
-            console.error("Label not found for modal thumbnail:", index);
-        }
-    });
-
-
-
-
+    // Initialize first image
+    updateImage(currentIndex);
 
     // Event listeners for carousel navigation buttons
     prevBtn.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        currentIndex = getValidIndex(currentIndex - 1);
         updateImage(currentIndex);
     });
 
     nextBtn.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % images.length;
+        currentIndex = getValidIndex(currentIndex + 1);
         updateImage(currentIndex);
     });
-
-    updateImage(currentIndex);
 
     // Quantity controls
     decreaseBtn.addEventListener("click", () => {
@@ -173,7 +95,6 @@ mainThumbnails.forEach((thumbnail, index) => {
     addToBasket.addEventListener("click", (e) => {
         e.preventDefault();
         const currentValue = parseInt(quantityInput.value);
-
         if (currentValue > 0) {
             basketCount.textContent = currentValue;
             basketCount.style.display = "flex";
@@ -198,13 +119,11 @@ mainThumbnails.forEach((thumbnail, index) => {
     function updateCartDisplay() {
         const quantity = parseInt(quantityInput.value);
         const pricePerItem = parseFloat(currentPrice.textContent.replace("$", ""));
-
         cartContent.innerHTML = `<p class="empty-message">Your cart is empty.</p>`;
 
         if (quantity > 0) {
             emptyMessage.classList.add("hidden");
             const totalPrice = (pricePerItem * quantity).toFixed(2);
-
             const cartItem = document.createElement("div");
             cartItem.classList.add("cart-item");
             cartItem.innerHTML = `
