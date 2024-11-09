@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const emptyMessage = document.querySelector(".empty-message");
     const currentPrice = document.querySelector(".current-price");
     const productTitle = document.querySelector(".product__text").textContent;
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const mainThumbnails = document.querySelectorAll(".product__thumbnails-main .thumbnail");
 
     let currentIndex = 0;
 
@@ -37,33 +39,124 @@ document.addEventListener("DOMContentLoaded", function () {
         "./images/image-product-4.jpg"
     ];
 
-    function updateImage() {
-        if (!itemImg) {
-            console.error("itemImg element not found.");
-            return;
+    // Ensure index is within valid range
+    function updateImage(index) {
+        if (index < 0 || index >= images.length) {
+            console.error("Index out of bounds:", index);
+            return; // Prevent updating if the index is invalid
         }
-
-        // Update the main image and progress bar
-        itemImg.src = images[currentIndex];
-        progress.value = currentIndex + 1;
-
-        // Apply object-position only to images after the first
+        console.log("Updating image:", index);
+        itemImg.src = images[index];
+        progress.value = index + 1;
         itemImg.style.objectPosition = currentIndex === 0 ? "" : "top";
     }
+
+    console.log("Number of thumbnails:", thumbnails.length); // Log number of thumbnails
+
+    thumbnails.forEach((thumbnail, index) => {
+        const label = thumbnail.closest("label");
+        if (label) {
+            label.addEventListener("click", () => {
+                const validIndex = getValidIndex(index); // Ensures valid index
+                updateImage(validIndex);
+            });
+        } else {
+            console.error("Label not found for thumbnail:", index);
+        }
+    });
+
+
+    mainThumbnails.forEach((thumbnail, index) => {
+        const label = thumbnail.closest("label");
+        if (label) {
+            label.addEventListener("click", () => {
+                const validIndex = index % images.length; // Ensures index is always within bounds
+                console.log("Updating image:", validIndex); // For debugging
+                updateImage(validIndex);
+
+                const radioButton = document.querySelector(`#image-product-${validIndex + 1}`);
+                if (radioButton) {
+                    radioButton.checked = true;
+                } else {
+                    console.error(`Radio button with ID image-product-${validIndex + 1} not found.`);
+                }
+            });
+        } else {
+            console.error("Label not found for thumbnail:", index);
+        }
+    });
+
+    // Function to ensure the index is always within the bounds of the images array
+function getValidIndex(index) {
+    return (index + images.length) % images.length; // This ensures the index is always within 0-3
+}
+
+// Event listeners for carousel navigation buttons
+prevBtn.addEventListener("click", () => {
+    currentIndex = getValidIndex(currentIndex - 1); // Ensure the index stays within bounds
+    updateImage(currentIndex);
+});
+
+nextBtn.addEventListener("click", () => {
+    currentIndex = getValidIndex(currentIndex + 1); // Ensure the index stays within bounds
+    updateImage(currentIndex);
+});
+
+// Image carousel thumbnail click event
+mainThumbnails.forEach((thumbnail, index) => {
+    const label = thumbnail.closest("label");
+    if (label) {
+        label.addEventListener("click", () => {
+            const validIndex = getValidIndex(index); // Ensure the index is within bounds
+            console.log("Updating image:", validIndex); // For debugging
+            updateImage(validIndex);
+
+            const radioButton = document.querySelector(`#image-product-${validIndex + 1}`);
+            if (radioButton) {
+                radioButton.checked = true;
+            } else {
+                console.error(`Radio button with ID image-product-${validIndex + 1} not found.`);
+            }
+        });
+    } else {
+        console.error("Label not found for thumbnail:", index);
+    }
+});
+
+
+
+
+    // Select only the modal view thumbnails
+    const modalThumbnails = document.querySelectorAll(".product__thumbnails-modal .thumbnail");
+
+    modalThumbnails.forEach((thumbnail, index) => {
+        const label = thumbnail.closest("label");
+        if (label) {
+            label.addEventListener("click", () => {
+                const validIndex = getValidIndex(index); // Ensures valid index
+                updateImage(validIndex);
+            });
+        } else {
+            console.error("Label not found for modal thumbnail:", index);
+        }
+    });
+
+
+
+
 
     // Event listeners for carousel navigation buttons
     prevBtn.addEventListener("click", () => {
         currentIndex = (currentIndex - 1 + images.length) % images.length;
-        updateImage();
+        updateImage(currentIndex);
     });
 
     nextBtn.addEventListener("click", () => {
         currentIndex = (currentIndex + 1) % images.length;
-        updateImage();
+        updateImage(currentIndex);
     });
 
-    // Initialize the first image
-    updateImage();
+    updateImage(currentIndex);
 
     // Quantity controls
     decreaseBtn.addEventListener("click", () => {
@@ -77,7 +170,6 @@ document.addEventListener("DOMContentLoaded", function () {
         quantityInput.value = parseInt(quantityInput.value) + 1;
     });
 
-    // Add to basket button
     addToBasket.addEventListener("click", (e) => {
         e.preventDefault();
         const currentValue = parseInt(quantityInput.value);
@@ -87,12 +179,10 @@ document.addEventListener("DOMContentLoaded", function () {
             basketCount.style.display = "flex";
             updateCartDisplay();
 
-            // Announce the change in basket count for screen readers
             const liveRegion = document.getElementById("live-region");
             liveRegion.textContent = `There are ${currentValue} items in your basket.`;
             basketBtn.focus();
 
-            // Scroll to the top of the page where the cart is located
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
@@ -100,25 +190,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Toggle cart modal on basket button click
     basketBtn.addEventListener("click", () => {
         cartModal.classList.toggle("hidden");
         updateCartDisplay();
     });
 
-    // Update cart display function
     function updateCartDisplay() {
         const quantity = parseInt(quantityInput.value);
         const pricePerItem = parseFloat(currentPrice.textContent.replace("$", ""));
-        
-        // Always ensure that the cart-content includes the empty message
-        cartContent.innerHTML = `<p class="empty-message">Your cart is empty.</p>`;  // Default state
+
+        cartContent.innerHTML = `<p class="empty-message">Your cart is empty.</p>`;
 
         if (quantity > 0) {
-            emptyMessage.classList.add("hidden"); // Hide empty message
+            emptyMessage.classList.add("hidden");
             const totalPrice = (pricePerItem * quantity).toFixed(2);
 
-            // Create a cart item and append it to the cart content
             const cartItem = document.createElement("div");
             cartItem.classList.add("cart-item");
             cartItem.innerHTML = `
@@ -132,41 +218,40 @@ document.addEventListener("DOMContentLoaded", function () {
             cartContent.innerHTML = "";
             cartContent.appendChild(cartItem);
 
-            // Select the delete icon and add event listener to remove the item
             const deleteIcon = cartItem.querySelector(".delete-icon");
             deleteIcon.addEventListener("click", () => {
-                cartContent.innerHTML = ""; // Clear cart content
-                emptyMessage.classList.remove("hidden"); // Show empty message again
+                cartContent.innerHTML = "";
+                emptyMessage.classList.remove("hidden");
                 basketCount.style.display = "none";
                 quantityInput.value = "0";
             });
 
-            // Create and append the checkout button
             const checkoutButton = document.createElement("button");
             checkoutButton.classList.add("checkout-btn");
             checkoutButton.textContent = "Checkout";
-            checkoutButton.style.backgroundColor = "rgb(255, 125, 26)";
-            checkoutButton.style.color = "rgb(29, 32, 37)";
-            checkoutButton.style.fontSize = "1.6rem";
-            checkoutButton.style.fontWeight = "bold";
-            checkoutButton.style.padding = "1.7rem";
-            checkoutButton.style.marginInline = "2.2rem";
-            checkoutButton.style.marginBottom = "2.2rem";
-            checkoutButton.style.border = "none";
-            checkoutButton.style.borderRadius = "7px";
-            checkoutButton.style.cursor = "pointer";
-            checkoutButton.style.width = "calc(100% - 4.4rem)";
+            checkoutButton.style = `
+                background-color: rgb(255, 125, 26);
+                color: rgb(29, 32, 37);
+                font-size: 1.6rem;
+                font-weight: bold;
+                padding: 1.7rem;
+                margin-inline: 2.2rem;
+                margin-bottom: 2.2rem;
+                border: none;
+                border-radius: 7px;
+                cursor: pointer;
+                width: calc(100% - 4.4rem);
+            `;
             cartContent.appendChild(checkoutButton);
 
             checkoutButton.addEventListener("click", () => {
                 alert("Proceeding to checkout!");
             });
         } else {
-            emptyMessage.classList.remove("hidden"); // Show empty message if no items
+            emptyMessage.classList.remove("hidden");
         }
     }
 
-    // Close cart modal on click outside or pressing escape
     document.addEventListener("click", (event) => {
         if (!cartModal.contains(event.target) && event.target !== basketBtn) {
             cartModal.classList.add("hidden");
