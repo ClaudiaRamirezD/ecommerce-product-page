@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateImage(currentIndex);
 
     // Function to open zoom modal on desktop only
-    itemImg.addEventListener("click", () => {
+itemImg.addEventListener("click", () => {
     console.log("Image clicked");
     console.log("Current window width:", window.innerWidth);
 
@@ -94,12 +94,27 @@ document.addEventListener("DOMContentLoaded", function () {
         zoomModal.style.opacity = "1"; // Set opacity to fully visible
         zoomModal.style.display = "flex"; // Make sure display is set to block or flex
 
+        // Show thumbnails in the modal (just in case they are hidden by default)
+        const thumbnails = document.querySelectorAll('.modal-thumbnails .thumbnail');
+        const modalThumbnailsContainer = document.querySelector('.modal-thumbnails');
+        
+        // Ensure the thumbnails are visible (set the display to flex or block)
+        modalThumbnailsContainer.style.display = "flex"; // or "block"
+        
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', () => {
+                zoomedImage.src = images[index]; // Change the zoomed image to the clicked thumbnail's image
+                currentIndex = index; // Update the current index
+            });
+        });
+
         // Verify the modal's visibility state
         console.log("zoomModal classList after removing 'hidden':", zoomModal.classList);
     } else {
         console.log("Mobile size detected, modal will not open");
     }
-    });
+});
+
 
 
 
