@@ -129,6 +129,17 @@ button {
   justify-content: center;
 }
 
+.product__main-img img {
+    height: auto;
+  }
+
+.product__thumbnails-main img,
+.product__thumbnails-modal img,
+.product__thumbnails-zoomed img {
+    width: clamp(7rem, 4.5000rem + 5.0000vw, 9rem);
+    height: auto;
+  }
+
 button .mobile-only {
   position: absolute;
   top: 50%;
@@ -571,7 +582,7 @@ footer {
   }
 
   .product__imgs {
-    width: 80%;
+    width: 70%;
   }
 
   .nav-links li {
@@ -802,6 +813,10 @@ footer {
 
   .close-zoom-btn{
     right: 24%;
+  }
+
+  .product {
+    align-items: stretch;
   }
 
 } 
