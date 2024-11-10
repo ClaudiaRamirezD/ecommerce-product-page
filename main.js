@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const zoomModal = document.querySelector("#zoom-modal");
     const zoomedImage = document.querySelector("#zoomed-image");
     const closeZoomModal = document.querySelector("#close-zoom-modal");
-    const desktopBreakpoint = 768;
+    const desktopBreakpoint = 912;
     const zoomedPrevBtn = document.querySelector("#prev-btn-desktop");
     const zoomedNextBtn = document.querySelector("#next-btn-desktop");
 

@@ -416,7 +416,7 @@ footer {
   opacity: .5;
 }
 
-@media (min-width: 50rem) {
+@media (min-width: 57rem) {
   body {
     margin: 0 auto;
   }
