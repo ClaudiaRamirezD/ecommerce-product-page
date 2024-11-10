@@ -146,7 +146,7 @@ button .mobile-only {
   z-index: 2; /* Ensure buttons are above the image */
 }
 
-.product__main-img button {
+.product__main-img button, #prev-btn-desktop, #next-btn-desktop {
   height: 4rem;
   width: 4rem;
   background-color: var(--white);
@@ -628,6 +628,7 @@ footer {
   .zoom-modal-content {
     display: flex;
     position: relative;
+    flex-direction: column;
   }
 
   #zoomed-image {
@@ -636,21 +637,17 @@ footer {
     object-fit: contain;
     border-radius: 2rem;
     margin: 0 auto;
+    position: relative;
   }
 
   .close-zoom-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.5);
+    top: -5rem;
+    right: 29%;
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
-  }
-
-  .close-zoom-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
   }
 
   /* Apply opacity only to the image when hovered */
@@ -753,6 +750,24 @@ footer {
   input[type="radio"]:checked + .thumbnail {
     border: 3px solid var(--clr-primary-orange);
     opacity: 0.7;
+  }
+
+  #prev-btn-desktop, #next-btn-desktop{
+    position: absolute;
+  }
+
+  #prev-btn-desktop{
+    left: 27%;
+    top: 25%;
+  }
+
+  #next-btn-desktop{
+    right: 27%;
+    top: 25%;
+  }
+
+  .product__thumbnails-zoomed{
+    justify-content: center;
   }
 
 }
