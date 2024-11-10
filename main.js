@@ -80,16 +80,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to open zoom modal on desktop only
     itemImg.addEventListener("click", () => {
-        console.log("Image clicked"); // Check if the click event is detected
-        console.log("Current window width:", window.innerWidth); // Log the current window width
-        if (window.innerWidth >= desktopBreakpoint) {
-            console.log("Desktop size detected, opening zoom modal"); // Log when modal should open on desktop
-            zoomedImage.src = images[currentIndex];
-            zoomModal.classList.remove("hidden");
-        } else {
-            console.log("Mobile size detected, modal will not open"); // Log if mobile is detected
-        }
+    console.log("Image clicked");
+    console.log("Current window width:", window.innerWidth);
+
+    if (window.innerWidth >= desktopBreakpoint) {
+        console.log("Desktop size detected, opening zoom modal");
+
+        zoomedImage.src = images[currentIndex];
+        
+        // Remove the "hidden" class and adjust other styles for visibility
+        zoomModal.classList.remove("hidden");
+        zoomModal.style.left = "0"; // Adjust left position if it was previously set off-screen
+        zoomModal.style.opacity = "1"; // Set opacity to fully visible
+        zoomModal.style.display = "flex"; // Make sure display is set to block or flex
+
+        // Verify the modal's visibility state
+        console.log("zoomModal classList after removing 'hidden':", zoomModal.classList);
+    } else {
+        console.log("Mobile size detected, modal will not open");
+    }
     });
+
+
 
     // Close zoom modal on all screen sizes
     closeZoomModal.addEventListener("click", () => {

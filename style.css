@@ -626,15 +626,16 @@ footer {
   }
 
   .zoom-modal-content {
+    display: flex;
     position: relative;
-    max-width: 80%;
-    max-height: 80%;
   }
 
   #zoomed-image {
-    width: 100%;
+    width: 40%;
     height: auto;
     object-fit: contain;
+    border-radius: 2rem;
+    margin: 0 auto;
   }
 
   .close-zoom-btn {
@@ -737,7 +738,14 @@ footer {
   stroke: var(--clr-primary-orange);
   }
 
+  
+  /* Apply opacity only to the image when hovered */
+  .product__thumbnails .thumbnail:hover {
+    opacity: 0.5;
+  }
 
-
-
+  .product__thumbnails input[type="radio"]:checked + .thumbnail {
+    border: 3px solid var(--clr-primary-orange);
+    opacity: 0.7;
+  }
 }
