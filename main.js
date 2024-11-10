@@ -17,8 +17,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const emptyMessage = document.querySelector(".empty-message");
     const currentPrice = document.querySelector(".current-price");
     const productTitle = document.querySelector(".product__text").textContent;
-    const thumbnails = document.querySelectorAll('.product__thumbnails-main .thumbnail');
-    const modalThumbnails = document.querySelectorAll(".product__thumbnails-modal .thumbnail");
+    const thumbnails = document.querySelectorAll(
+    ".product__thumbnails-main .thumbnail");
+    const modalThumbnails = document.querySelectorAll(
+    ".product__thumbnails-modal .thumbnail");
+    const zoomModal = document.querySelector("#zoom-modal");
+    const zoomedImage = document.querySelector("#zoomed-image");
+    const closeZoomModal = document.querySelector("#close-zoom-modal");
+    const desktopBreakpoint = 768;
+
+    console.log("zoomModal:", zoomModal);
+    console.log("zoomedImage:", zoomedImage);
 
     let currentIndex = 0;
 
@@ -68,6 +77,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initialize first image
     updateImage(currentIndex);
+
+    // Function to open zoom modal on desktop only
+    itemImg.addEventListener("click", () => {
+        console.log("Image clicked"); // Check if the click event is detected
+        console.log("Current window width:", window.innerWidth); // Log the current window width
+        if (window.innerWidth >= desktopBreakpoint) {
+            console.log("Desktop size detected, opening zoom modal"); // Log when modal should open on desktop
+            zoomedImage.src = images[currentIndex];
+            zoomModal.classList.remove("hidden");
+        } else {
+            console.log("Mobile size detected, modal will not open"); // Log if mobile is detected
+        }
+    });
+
+    // Close zoom modal on all screen sizes
+    closeZoomModal.addEventListener("click", () => {
+        console.log("Close button clicked");
+        zoomModal.classList.add("hidden");
+    });
+
+    // Optional: Adjust the behavior on window resize
+    window.addEventListener("resize", () => {
+        console.log("Window resized, new width:", window.innerWidth); // Log the new window width on resize
+        if (zoomModal.classList.contains("hidden") === false && window.innerWidth < desktopBreakpoint) {
+            console.log("Switching to mobile, closing zoom modal"); // Log if modal closes on resize to mobile
+            zoomModal.classList.add("hidden");
+        }
+    });
 
     // Event listeners for carousel navigation buttons
     prevBtn.addEventListener("click", () => {
