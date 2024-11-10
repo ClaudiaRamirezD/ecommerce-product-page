@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const zoomedImage = document.querySelector("#zoomed-image");
     const closeZoomModal = document.querySelector("#close-zoom-modal");
     const desktopBreakpoint = 768;
+    const zoomedPrevBtn = document.querySelector("#prev-btn-desktop");
+    const zoomedNextBtn = document.querySelector("#next-btn-desktop");
 
     console.log("zoomModal:", zoomModal);
     console.log("zoomedImage:", zoomedImage);
@@ -79,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateImage(currentIndex);
 
     // Function to open zoom modal on desktop only
-itemImg.addEventListener("click", () => {
+    itemImg.addEventListener("click", () => {
     console.log("Image clicked");
     console.log("Current window width:", window.innerWidth);
 
@@ -113,7 +115,7 @@ itemImg.addEventListener("click", () => {
     } else {
         console.log("Mobile size detected, modal will not open");
     }
-});
+    });
 
 
 
@@ -143,6 +145,40 @@ itemImg.addEventListener("click", () => {
         currentIndex = getValidIndex(currentIndex + 1);
         updateImage(currentIndex);
     });
+
+    // Event listeners for zoomed navigation buttons
+    zoomedPrevBtn.addEventListener("click", () => {
+        currentIndex = getValidIndex(currentIndex - 1);
+        zoomedImage.src = images[currentIndex];
+    });
+
+    zoomedNextBtn.addEventListener("click", () => {
+        currentIndex = getValidIndex(currentIndex + 1);
+        zoomedImage.src = images[currentIndex];
+    });
+
+    // Handle click events on radio buttons (thumbnails) to change zoomed image
+    const zoomThumbnails = document.querySelectorAll('.product__thumbnails-zoomed input[type="radio"]');
+
+    zoomThumbnails.forEach((radioButton, index) => {
+            radioButton.addEventListener("change", () => {
+                if (radioButton.checked) {
+                    zoomedImage.src = images[index]; // Change the zoomed image to the selected thumbnail's image
+                    currentIndex = index; // Update the current index
+                }
+            });
+    });
+    
+    // Set the initial checked state of the radio buttons based on the current image
+    const currentRadioButton = document.querySelector(`#zoomed-image-product-${currentIndex + 1}`);
+    if (currentRadioButton) {
+            currentRadioButton.checked = true;
+    }
+    
+    // Verify the modal's visibility state
+    console.log("zoomModal classList after removing 'hidden':", zoomModal.classList);
+
+
 
     // Quantity controls
     decreaseBtn.addEventListener("click", () => {

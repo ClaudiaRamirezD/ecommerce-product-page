@@ -401,6 +401,10 @@ footer {
   color: hsl(228, 45%, 44%);
 }
 
+.checkout-btn:hover{
+  opacity: .5;
+}
+
 @media (min-width: 50rem) {
   body {
     margin: 0 auto;
@@ -632,7 +636,7 @@ footer {
   }
 
   #zoomed-image {
-    width: 40%;
+    width: 34%;
     height: auto;
     object-fit: contain;
     border-radius: 2rem;
@@ -754,20 +758,50 @@ footer {
 
   #prev-btn-desktop, #next-btn-desktop{
     position: absolute;
+    padding-block: 0;
+    top: 30%;
   }
 
   #prev-btn-desktop{
-    left: 27%;
-    top: 25%;
+    left: 31%;
+    
   }
 
   #next-btn-desktop{
-    right: 27%;
-    top: 25%;
+    right: 31%;
+    
   }
 
   .product__thumbnails-zoomed{
     justify-content: center;
   }
 
+  .zoom-thumbnail:hover{
+  transform: scale(1.1); /* Optional: Add hover effect for thumbnails */
+  opacity: 0.5;
+  }
+  .product__thumbnails-zoomed input[type="radio"]:checked + .zoom-thumbnail {
+    border: 3px solid var(--clr-primary-orange);
+    opacity: 0.7;
+  }
+
 }
+
+@media (min-width: 90rem) {
+  #zoomed-image{
+    width: 50%;
+  }
+
+  #prev-btn-desktop{
+    left: 23%;
+  }
+
+  #next-btn-desktop{
+    right: 23%;
+  }
+
+  .close-zoom-btn{
+    right: 24%;
+  }
+
+} 
