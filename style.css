@@ -270,6 +270,8 @@ dd.old-price {
   color: var(--clr-very-dark-blue);
   font-weight: var(--fw-bold);
   font-size: var(--fs-p);
+  min-width: 4.5rem;
+  min-height: 4.5rem;
 }
 
 .quantity {
@@ -303,6 +305,8 @@ input[type="number"]::-webkit-inner-spin-button {
   align-items: center;
   justify-content: center;
   z-index: 4;
+  min-width: 4.5rem;
+  min-height: 4.5rem;
 }
 #decrease-btn {
   left: 20px;
