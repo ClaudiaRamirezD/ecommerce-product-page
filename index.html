@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <!-- displays site properly based on user's device -->
     <meta
       name="description"
       content="A responsive ecommerce product page with an interactive toggle feature, built using HTML, CSS, and JavaScript. Perfect for improving frontend development skills."
-    />
+    >
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
       href="./images/favicon-32x32.png"
-    />
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="style.css" />
+    >
+    <link rel="stylesheet" href="reset.css" >
+    <link rel="stylesheet" href="style.css" >
     <title>Frontend Mentor | E-commerce product page</title>
   </head>
   <body>
     <div class="container">
       <header>
-        <nav aria-label="Main Navigation">
+        <nav id="navbar" aria-label="Main Navigation">
           <div class="mobile-nav">
             <div class="left-nav">
               <button
@@ -36,14 +36,14 @@
                   src="./images/icon-menu.svg"
                   alt="Open navigation menu"
                   class="menu-img"
-                />
+                >
               </button>
               <a href="#" class="logo">
                 <img
                   src="./images/logo.svg"
                   alt="Sneakers Home Page"
                   aria-current="page"
-                />
+                >
               </a>
               <div class="backdrop mobile-only">
                 <ul class="nav-links" aria-hidden="true" aria-expanded="false">
@@ -58,7 +58,7 @@
                       <img
                         src="./images/icon-close.svg"
                         alt="Close navigation menu"
-                      />
+                      >
                     </button>
                   </li>
                   <li><a href="#">Collections</a></li>
@@ -70,19 +70,31 @@
               </div>
             </div>
             <div class="right-nav">
+              <div
+                id="live-region"
+                aria-live="polite"
+                style="
+                  position: absolute;
+                  width: 0;
+                  height: 0;
+                  padding: 0;
+                  margin: 0;
+                  border: 0;
+                  clip: rect(0 0 0 0);
+                  overflow: hidden;
+                "
+              ></div>
               <button
                 id="basket-btn"
                 aria-label="Open dropdown basket"
                 aria-controls="cart-modal"
               >
-                <img src="./images/icon-cart.svg" alt="Cart icon" />
+                <img src="./images/icon-cart.svg" alt="Cart icon" >
                 <!-- Hidden live region for screen readers -->
-                <div id="live-region" aria-live="polite" style="position: absolute; width: 0; height: 0; padding: 0; margin: 0; border: 0; clip: rect(0 0 0 0); overflow: hidden;"></div>
                 <span id="basket-count"></span>
-
               </button>
               <button>
-                <img src="./images/image-avatar.png" alt="" class="avatar" />
+                <img src="./images/image-avatar.png" alt="" class="avatar" >
               </button>
             </div>
             <ul
@@ -129,7 +141,7 @@
                   src="./images/icon-previous.svg"
                   alt="icon previous"
                   class="previous-next-icons"
-                />
+                >
               </button>
               <img
                 id="item-img"
@@ -153,7 +165,7 @@
                   src="./images/icon-next.svg"
                   alt="icon next"
                   class="previous-next-icons"
-                />
+                >
               </button>
               <div id="cart-modal" class="cart-modal hidden">
                 <h2>Cart</h2>
@@ -165,10 +177,44 @@
               <!-- The modal container for the larger image view -->
               <div id="image-modal" class="modal hidden">
                 <div class="modal-content">
-                  <button id="close-modal" aria-label="Close image view">&times;</button>
-                  <button id="prev-modal-btn" aria-label="Previous image"><svg width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/></svg></button>
-                  <img id="modal-img" src="./images/image-product-1.jpg" alt="Product image" />
-                  <button id="next-modal-btn" aria-label="Next image"><svg width="13" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/></svg></button>
+                  <button id="close-modal" aria-label="Close image view">
+                    &times;
+                  </button>
+                  <button id="prev-modal-btn" aria-label="Previous image">
+                    <svg
+                      width="12"
+                      height="18"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M11 1 3 9l8 8"
+                        stroke="#1D2026"
+                        stroke-width="3"
+                        fill="none"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  <img
+                    id="modal-img"
+                    src="./images/image-product-1.jpg"
+                    alt="Product image"
+                  >
+                  <button id="next-modal-btn" aria-label="Next image">
+                    <svg
+                      width="13"
+                      height="18"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m2 1 8 8-8 8"
+                        stroke="#1D2026"
+                        stroke-width="3"
+                        fill="none"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
                   <div class="modal-thumbnails">
                     <ul class="product__thumbnails-modal desktop-only">
                       <li>
@@ -179,8 +225,12 @@
                             name="product-thumbnail-img"
                             aria-label="Select to see first product image"
                             autofocus
-                          />
-                          <img src="./images/image-product-1-thumbnail.jpg" alt="" class="thumbnail" />
+                          >
+                          <img
+                            src="./images/image-product-1-thumbnail.jpg"
+                            alt=""
+                            class="thumbnail"
+                          >
                         </label>
                       </li>
                       <li>
@@ -190,8 +240,12 @@
                             id="image-product-2"
                             name="product-thumbnail-img"
                             aria-label="Select to see second product image"
-                          />
-                          <img src="./images/image-product-2-thumbnail.jpg" alt="" class="thumbnail" />
+                          >
+                          <img
+                            src="./images/image-product-2-thumbnail.jpg"
+                            alt=""
+                            class="thumbnail"
+                          >
                         </label>
                       </li>
                       <li>
@@ -201,8 +255,12 @@
                             id="image-product-3"
                             name="product-thumbnail-img"
                             aria-label="Select to see third product image"
-                          />
-                          <img src="./images/image-product-3-thumbnail.jpg" alt="" class="thumbnail"/>
+                          >
+                          <img
+                            src="./images/image-product-3-thumbnail.jpg"
+                            alt=""
+                            class="thumbnail"
+                          >
                         </label>
                       </li>
                       <li>
@@ -212,8 +270,12 @@
                             id="image-product-4"
                             name="product-thumbnail-img"
                             aria-label="Select to see fourth product image"
-                          />
-                          <img src="./images/image-product-4-thumbnail.jpg" alt="" class="thumbnail"/>
+                          >
+                          <img
+                            src="./images/image-product-4-thumbnail.jpg"
+                            alt=""
+                            class="thumbnail"
+                          >
                         </label>
                       </li>
                     </ul>
@@ -226,123 +288,166 @@
                 <label>
                   <input
                     type="radio"
-                    id="image-product-1"
+                    id="desktop-image-product-1"
                     name="product-thumbnail-img"
                     aria-label="Select to see first product image"
-                    autofocus
-                  />
-                  <img src="./images/image-product-1-thumbnail.jpg" alt="" class="thumbnail" />
+                  >
+                  <img
+                    src="./images/image-product-1-thumbnail.jpg"
+                    alt=""
+                    class="thumbnail"
+                  >
                 </label>
               </li>
               <li>
                 <label>
                   <input
                     type="radio"
-                    id="image-product-2"
+                
                     name="product-thumbnail-img"
                     aria-label="Select to see second product image"
-                  />
-                  <img src="./images/image-product-2-thumbnail.jpg" alt="" class="thumbnail" />
+                  >
+                  <img
+                    src="./images/image-product-2-thumbnail.jpg"
+                    alt=""
+                    class="thumbnail"
+                  >
                 </label>
               </li>
               <li>
                 <label>
                   <input
                     type="radio"
-                    id="image-product-3"
+                    
                     name="product-thumbnail-img"
                     aria-label="Select to see third product image"
-                  />
-                  <img src="./images/image-product-3-thumbnail.jpg" alt="" class="thumbnail"/>
+                  >
+                  <img
+                    src="./images/image-product-3-thumbnail.jpg"
+                    alt=""
+                    class="thumbnail"
+                  >
                 </label>
               </li>
               <li>
                 <label>
                   <input
                     type="radio"
-                    id="image-product-4"
+                  
                     name="product-thumbnail-img"
                     aria-label="Select to see fourth product image"
-                  />
-                  <img src="./images/image-product-4-thumbnail.jpg" alt="" class="thumbnail"/>
+                  >
+                  <img
+                    src="./images/image-product-4-thumbnail.jpg"
+                    alt=""
+                    class="thumbnail"
+                  >
                 </label>
               </li>
             </ul>
             <div id="zoom-modal" class="zoom-modal hidden">
               <div class="zoom-modal-content">
-                  <img id="zoomed-image" src="" alt="Zoomed Product Image">
-                  <button id="close-zoom-modal" class="close-zoom-btn"><svg width="14" height="15" xmlns="http://www.w3.org/2000/svg"><path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z" fill="white" fill-rule="evenodd"/></svg></button>
-                  <button
-                    id="prev-btn-desktop"
-                    class="desktop-only prev-btn-desktop"
-                    aria-label="Click to see previous image"
+                <img id="zoomed-image" src="./images/image-product-1.jpg" alt="Zoomed Product Image" >
+                <button id="close-zoom-modal" class="close-zoom-btn">
+                  <svg
+                    width="14"
+                    height="15"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <img
-                      src="./images/icon-previous.svg"
-                      alt="icon previous"
-                      class="previous-next-icons"
+                    <path
+                      d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+                      fill="white"
+                      fill-rule="evenodd"
                     />
-                  </button>
-                  <button
-                    id="next-btn-desktop"
-                    class="desktop-only next-btn-desktop"
-                    aria-label="Click to see next image"
+                  </svg>
+                </button>
+                <button
+                  id="prev-btn-desktop"
+                  class="desktop-only prev-btn-desktop"
+                  aria-label="Click to see previous image"
+                >
+                  <img
+                    src="./images/icon-previous.svg"
+                    alt="icon previous"
+                    class="previous-next-icons"
                   >
-                    <img
-                      src="./images/icon-next.svg"
-                      alt="icon next"
-                      class="previous-next-icons"
-                    />
-                  </button>
-                  <ul class="product__thumbnails-zoomed desktop-only">
-                    <li>
-                      <label>
-                        <input
-                          type="radio"
-                          id="zoomed-image-product-1"
-                          name="product-thumbnail-img"
-                          aria-label="Select to see first product image"
-                          autofocus
-                        />
-                        <img src="./images/image-product-1-thumbnail.jpg" alt="" class="zoom-thumbnail" />
-                      </label>
-                    </li>
-                    <li>
-                      <label>
-                        <input
-                          type="radio"
-                          id="zoomed-image-product-2"
-                          name="product-thumbnail-img"
-                          aria-label="Select to see second product image"
-                        />
-                        <img src="./images/image-product-2-thumbnail.jpg" alt="" class="zoom-thumbnail" />
-                      </label>
-                    </li>
-                    <li>
-                      <label>
-                        <input
-                          type="radio"
-                          id="zoomed-image-product-3"
-                          name="product-thumbnail-img"
-                          aria-label="Select to see third product image"
-                        />
-                        <img src="./images/image-product-3-thumbnail.jpg" alt="" class="zoom-thumbnail"/>
-                      </label>
-                    </li>
-                    <li>
-                      <label>
-                        <input
-                          type="radio"
-                          id="zoomed-image-product-4"
-                          name="product-thumbnail-img"
-                          aria-label="Select to see fourth product image"
-                        />
-                        <img src="./images/image-product-4-thumbnail.jpg" alt="" class="zoom-thumbnail"/>
-                      </label>
-                    </li>
-                  </ul>
+                </button>
+                <button
+                  id="next-btn-desktop"
+                  class="desktop-only next-btn-desktop"
+                  aria-label="Click to see next image"
+                >
+                  <img
+                    src="./images/icon-next.svg"
+                    alt="icon next"
+                    class="previous-next-icons"
+                  >
+                </button>
+                <ul class="product__thumbnails-zoomed desktop-only">
+                  <li>
+                    <label>
+                      <input
+                        type="radio"
+                        id="zoomed-image-product-1"
+                        name="product-thumbnail-img"
+                        aria-label="Select to see first product image"
+                      >
+                      <img
+                        src="./images/image-product-1-thumbnail.jpg"
+                        alt=""
+                        class="zoom-thumbnail"
+
+                      >
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input
+                        type="radio"
+                        id="zoomed-image-product-2"
+                        name="product-thumbnail-img"
+                        aria-label="Select to see second product image"
+                      >
+                      <img
+                        src="./images/image-product-2-thumbnail.jpg"
+                        alt=""
+                        class="zoom-thumbnail"
+                      >
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input
+                        type="radio"
+                        id="zoomed-image-product-3"
+                        name="product-thumbnail-img"
+                        aria-label="Select to see third product image"
+                      >
+                      <img
+                        src="./images/image-product-3-thumbnail.jpg"
+                        alt=""
+                        class="zoom-thumbnail"
+                      >
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input
+                        type="radio"
+                        id="zoomed-image-product-4"
+                        name="product-thumbnail-img"
+                        aria-label="Select to see fourth product image"
+                      >
+                      <img
+                        src="./images/image-product-4-thumbnail.jpg"
+                        alt=""
+                        class="zoom-thumbnail"
+                      >
+                    </label>
+                  </li>
+                </ul>
               </div>
-            </div>  
+            </div>
           </div>
           <section class="product__text-section">
             <div class="product__description">
@@ -376,7 +481,7 @@
                     aria-label="Decrease the number of items you want"
                     class="inc-dec-btns"
                   >
-                    <img src="./images/icon-minus.svg" alt="decrease button" />
+                    <img src="./images/icon-minus.svg" alt="decrease button" >
                   </button>
                   <input
                     type="number"
@@ -385,21 +490,29 @@
                     min="1"
                     aria-live="polite"
                     aria-label="Enter the number of items you want"
-                  />
+                  >
                   <button
                     id="increase-btn"
                     type="button"
                     aria-label="Increase the number of items you want"
                     class="inc-dec-btns"
                   >
-                    <img src="./images/icon-plus.svg" alt="" />
+                    <img src="./images/icon-plus.svg" alt="" >
                   </button>
                 </div>
                 <!-- Live region for announcing quantity changes -->
-                <div id="quantity-live-region" aria-live="polite" class="sr-only"></div>
+                <div
+                  id="quantity-live-region"
+                  aria-live="polite"
+                  class="sr-only"
+                ></div>
 
                 <!-- Live region for announcing cart updates -->
-                <div id="cart-live-region" aria-live="polite" class="sr-only"></div>
+                <div
+                  id="cart-live-region"
+                  aria-live="polite"
+                  class="sr-only"
+                ></div>
               </fieldset>
 
               <div class="cart">
@@ -413,8 +526,9 @@
                       d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
                       fill="currentColor"
                       fill-rule="nonzero"
-                    /></svg
-                  >Add to cart
+                    />
+                  </svg>
+                  Add to cart
                 </button>
               </div>
             </form>
@@ -424,9 +538,12 @@
       <footer>
         <div class="attribution">
           Challenge by
-          <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-            >Frontend Mentor</a
-          >. Coded by <a href="#">Claudia Dom</a>.
+          <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
+            Frontend Mentor
+          </a>
+          . Coded by
+          <a href="#">Claudia Dom</a>
+          .
         </div>
       </footer>
     </div>
