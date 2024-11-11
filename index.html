@@ -47,8 +47,18 @@
               <div class="backdrop mobile-only">
                 <ul class="nav-links" aria-hidden="true" aria-expanded="false">
                   <li>
-                    <button class="menu-close mobile-only" aria-label="Close side navigation menu" id="menu-close" tabindex="-1">
-                    <img src="./images/icon-close.svg" alt="Close navigation menu">
+                    <button
+                      class="menu-close mobile-only"
+                      id="menu-close"
+                      aria-expanded="true"
+                      aria-controls="side-nav"
+                      aria-label="Close side navigation menu"
+                      tabindex="-1"
+                    >
+                      <img
+                        src="./images/icon-close.svg"
+                        alt="Close navigation menu"
+                      >
                     </button>
                   </li>
                   <li><a href="#" aria-label="Go to Collections">Collections</a></li>
@@ -127,6 +137,7 @@
                 id="prev-btn"
                 class="mobile-only prev-btn"
                 aria-label="Click to see previous image"
+                tabindex="-1"
               >
                 <img
                   src="./images/icon-previous.svg"
@@ -150,6 +161,7 @@
                 id="next-btn"
                 class="mobile-only next-btn"
                 aria-label="Click to see next image"
+                tabindex="-1"
               >
                 <img
                   src="./images/icon-next.svg"
