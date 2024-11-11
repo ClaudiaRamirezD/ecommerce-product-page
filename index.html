@@ -383,6 +383,7 @@
                     id="number-of-items"
                     value="0"
                     min="1"
+                    aria-live="polite"
                     aria-label="Enter the number of items you want"
                   />
                   <button
@@ -394,6 +395,11 @@
                     <img src="./images/icon-plus.svg" alt="" />
                   </button>
                 </div>
+                <!-- Live region for announcing quantity changes -->
+                <div id="quantity-live-region" aria-live="polite" class="sr-only"></div>
+
+                <!-- Live region for announcing cart updates -->
+                <div id="cart-live-region" aria-live="polite" class="sr-only"></div>
               </fieldset>
 
               <div class="cart">

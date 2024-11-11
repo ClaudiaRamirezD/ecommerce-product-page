@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const desktopBreakpoint = 912;
     const zoomedPrevBtn = document.querySelector("#prev-btn-desktop");
     const zoomedNextBtn = document.querySelector("#next-btn-desktop");
+    const quantityLiveRegion = document.getElementById("quantity-live-region");
+    const cartLiveRegion = document.getElementById("cart-live-region");
 
     console.log("zoomModal:", zoomModal);
     console.log("zoomedImage:", zoomedImage);
@@ -185,11 +187,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let currentValue = parseInt(quantityInput.value);
         if (currentValue >= 1) {
             quantityInput.value = currentValue - 1;
+            quantityLiveRegion.textContent = `Quantity decreased to ${quantityInput.value}`;
         }
     });
 
     increaseBtn.addEventListener("click", () => {
         quantityInput.value = parseInt(quantityInput.value) + 1;
+        quantityLiveRegion.textContent = `Quantity increased to ${quantityInput.value}`;
     });
 
     addToBasket.addEventListener("click", (e) => {
@@ -200,8 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
             basketCount.style.display = "flex";
             updateCartDisplay();
 
-            const liveRegion = document.getElementById("live-region");
-            liveRegion.textContent = `There are ${currentValue} items in your basket.`;
+            cartLiveRegion.textContent = `There are ${currentValue} items in your basket.`;
             basketBtn.focus();
 
             window.scrollTo({
@@ -221,9 +224,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const pricePerItem = parseFloat(currentPrice.textContent.replace("$", ""));
         cartContent.innerHTML = `<p class="empty-message">Your cart is empty.</p>`;
 
+
+        // Update live region when cart is empty
+        const liveRegion = document.getElementById("live-region");
         if (quantity > 0) {
             emptyMessage.classList.add("hidden");
             const totalPrice = (pricePerItem * quantity).toFixed(2);
+
             const cartItem = document.createElement("div");
             cartItem.classList.add("cart-item");
             cartItem.innerHTML = `
@@ -237,12 +244,18 @@ document.addEventListener("DOMContentLoaded", function () {
             cartContent.innerHTML = "";
             cartContent.appendChild(cartItem);
 
+            // Update live region with cart item added message
+            liveRegion.textContent = `The price per item is:${pricePerItem.toFixed(2)} and ${quantity} item(s) added to your cart. Total: $${totalPrice}.`;
+
             const deleteIcon = cartItem.querySelector(".delete-icon");
             deleteIcon.addEventListener("click", () => {
                 cartContent.innerHTML = "";
                 emptyMessage.classList.remove("hidden");
                 basketCount.style.display = "none";
                 quantityInput.value = "0";
+
+                // Update live region to reflect empty cart
+                liveRegion.textContent = "Your cart is now empty.";
             });
 
             const checkoutButton = document.createElement("button");
@@ -268,6 +281,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         } else {
             emptyMessage.classList.remove("hidden");
+
+             // Update live region when cart is empty
+            liveRegion.textContent = "Your cart is empty.";
         }
     }
 
