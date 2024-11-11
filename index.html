@@ -30,7 +30,6 @@
                 aria-expanded="false"
                 aria-controls="navbar"
                 aria-label="Open navigation menu"
-                aria-hidden="false"
               >
                 <img
                   src="./images/icon-menu.svg"
@@ -48,25 +47,17 @@
               <div class="backdrop mobile-only">
                 <ul class="nav-links" aria-hidden="true" aria-expanded="false">
                   <li>
-                    <button
-                      class="menu-close mobile-only"
-                      id="menu-close"
-                      aria-expanded="true"
-                      aria-controls="side-nav"
-                      aria-label="Close side navigation menu"
-                    >
-                      <img
-                        src="./images/icon-close.svg"
-                        alt="Close navigation menu"
-                      >
+                    <button class="menu-close mobile-only" aria-label="Close side navigation menu" id="menu-close" tabindex="-1">
+                    <img src="./images/icon-close.svg" alt="Close navigation menu">
                     </button>
                   </li>
-                  <li><a href="#">Collections</a></li>
-                  <li><a href="#">Men</a></li>
-                  <li><a href="#">Women</a></li>
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href="#" aria-label="Go to Collections">Collections</a></li>
+                  <li><a href="#" aria-label="Go to Men’s Section">Men</a></li>
+                  <li><a href="#" aria-label="Go to Women’s Section">Women</a></li>
+                  <li><a href="#" aria-label="About Us">About</a></li>
+                  <li><a href="#" aria-label="Contact Us">Contact</a></li>
                 </ul>
+
               </div>
             </div>
             <div class="right-nav">
