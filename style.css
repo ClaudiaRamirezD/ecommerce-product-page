@@ -270,14 +270,13 @@ dd.old-price {
   color: var(--clr-very-dark-blue);
   font-weight: var(--fw-bold);
   font-size: var(--fs-p);
-  min-width: 4.5rem;
-  min-height: 4.5rem;
 }
 
 .quantity {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .input-container {
@@ -285,6 +284,7 @@ dd.old-price {
   display: flex;
   align-items: center;
   width: 100%;
+  gap: 1rem;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -297,16 +297,16 @@ input[type="number"]::-webkit-inner-spin-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: .2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 4;
-  min-width: 4.5rem;
-  min-height: 4.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 #decrease-btn {
   left: 20px;
@@ -581,7 +581,6 @@ footer {
   }
 
   .product__buttons {
-    grid-template-columns: 1fr 2fr;
     display: grid;
     gap: 2rem;
     align-items: center;
@@ -810,7 +809,12 @@ footer {
     border: 3px solid var(--clr-primary-orange);
     opacity: 0.7;
   }
+}
 
+@media (min-width: 75rem) {
+  .product__buttons{
+    grid-template-columns: 1.5fr 2fr;
+  }
 }
 
 @media (min-width: 90rem) {
